@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\rhoad\Documents\CSCE450\A4\src\GLSL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\rhoad\Documents\CSCE450\A4\src\Link.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\rhoad\Documents\CSCE450\A4\src\MatrixStack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\rhoad\Documents\CSCE450\A4\src\ObjectiveA4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\rhoad\Documents\CSCE450\A4\src\OptimizerGD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\rhoad\Documents\CSCE450\A4\src\OptimizerGDLS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\rhoad\Documents\CSCE450\A4\src\OptimizerNM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\rhoad\Documents\CSCE450\A4\src\Program.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\rhoad\Documents\CSCE450\A4\src\Shape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\rhoad\Documents\CSCE450\A4\src\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\rhoad\Documents\CSCE450\A4\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\rhoad\Documents\CSCE450\A4\src\GLSL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\rhoad\Documents\CSCE450\A4\src\Link.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\rhoad\Documents\CSCE450\A4\src\MatrixStack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\rhoad\Documents\CSCE450\A4\src\Objective.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\rhoad\Documents\CSCE450\A4\src\ObjectiveA4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\rhoad\Documents\CSCE450\A4\src\Optimizer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\rhoad\Documents\CSCE450\A4\src\OptimizerGD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\rhoad\Documents\CSCE450\A4\src\OptimizerGDLS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\rhoad\Documents\CSCE450\A4\src\OptimizerNM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\rhoad\Documents\CSCE450\A4\src\Program.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\rhoad\Documents\CSCE450\A4\src\Shape.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\rhoad\Documents\CSCE450\A4\src\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\rhoad\Documents\CSCE450\A4\src\stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\rhoad\Documents\CSCE450\A4\src\tiny_obj_loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\rhoad\Documents\CSCE450\A4\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\rhoad\Documents\CSCE450\A4\resources\simple_frag.glsl" />
+    <None Include="C:\Users\rhoad\Documents\CSCE450\A4\resources\simple_vert.glsl" />
+    <None Include="C:\Users\rhoad\Documents\CSCE450\A4\resources\tex_frag.glsl" />
+    <None Include="C:\Users\rhoad\Documents\CSCE450\A4\resources\tex_vert.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{42BC6CC1-A0C9-3D7B-9F13-BA4DE5D5851A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{04A330ED-0055-3333-804E-CD3622C49858}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
