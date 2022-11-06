@@ -11,7 +11,7 @@ class OptimizerNM : public Optimizer
 public:
 	OptimizerNM();
 	virtual ~OptimizerNM();
-	virtual Eigen::VectorXd optimize(const std::shared_ptr<Objective> objective, const Eigen::VectorXd &xInit);
+	virtual Eigen::VectorXd optimize(const std::shared_ptr<ObjectiveA4> objective, const Eigen::VectorXd& thetaInit, const Eigen::VectorXd& pTar, bool finiteDiff);
 	
 	void setTol(double tol) { this->tol = tol; }
 	void setIterMax(int iterMax) { this->iterMax = iterMax; }
@@ -19,7 +19,7 @@ public:
 	
 private:
 	double tol;
-	int iterMax;
+	int iterMax; 
 	int iter;
 };
 

@@ -7,7 +7,8 @@
 #include <Eigen/Dense>
 
 class ObjectiveA4;
-class Optimizer;
+class OptimizerGDLS;
+class OptimizerNM;
 class Shape;
 class MatrixStack;
 class Program;
@@ -33,12 +34,8 @@ public:
 
 	void setMeshMatrix(const Eigen::Matrix4d &M) { meshMat = M; }
 
-	void calculateTransformations(const Eigen::VectorXd &pTar);
-
-	Eigen::MatrixXd calculateP();
-	Eigen::MatrixXd calculatePPrime();
-	Eigen::MatrixXd calculatePDoublePrime();
-
+	static Eigen::VectorXd updateAngles(Eigen::VectorXd thetaInit, const Eigen::Vector3d pTar, std::shared_ptr<ObjectiveA4> objective, std::shared_ptr<OptimizerGDLS> optimizerGDLS, std::shared_ptr<OptimizerNM> optimizerNM, bool finiteDiff);
+	
 	void draw(const std::shared_ptr<Program> prog, std::shared_ptr<MatrixStack> MV, const std::shared_ptr<Shape> shape) const;
 	
 private:

@@ -16,6 +16,7 @@
 #include "Program.h"
 #include "Optimizer.h"
 #include "OptimizerGDLS.h"
+#include "OptimizerNM.h"
 #include "ObjectiveA4.h"
 
 using namespace std;
@@ -44,55 +45,30 @@ void Link::addChild(shared_ptr<Link> child)
 	this->child = child;
 }
 
-MatrixXd Link::calculateP() 
+Eigen::VectorXd Link::updateAngles(Eigen::VectorXd thetaInit, const Eigen::Vector3d pTar, std::shared_ptr<ObjectiveA4> objective, std::shared_ptr<OptimizerGDLS> optimizerGDLS, std::shared_ptr<OptimizerNM> optimizerNM, bool finiteDiff)
 {
+	int n = thetaInit.rows();
+	VectorXd theta = thetaInit;
+	VectorXd g(n);
+	MatrixXd H(n, n);
 
-	MatrixXd R(3, 3);
-	R << cos(angle), -sin(angle), 0,
-		sin(angle), cos(angle), 0,
-		0, 0, 1;
+	double f = objective->evalObjective(thetaInit, pTar, g, H);
 
-	Matrix3d T;
-	T.setIdentity();
-	T.col(2) = Vector3d(this->position[0], this->position[1], 1.0);
+	VectorXd thetaGDLS = optimizerGDLS->optimize(objective, thetaInit, pTar, finiteDiff);
+	cout << "Number of iterations for GDLS: " << optimizerGDLS->getIter() << endl;
 
-	return T * R;
+	VectorXd thetaNM = optimizerNM->optimize(objective, thetaGDLS, pTar, finiteDiff);
+	cout << "Number of iterations for NM: " << optimizerNM->getIter() << endl;
+
+	double fNew = objective->evalObjective(thetaNM, pTar);
+
+	if (fNew < f)
+	{
+		return thetaGDLS;
+	}
+
+	return thetaGDLS;
 }
-
-MatrixXd Link::calculatePPrime() 
-{
-	MatrixXd R1(3, 3);
-	R1 << -sin(angle), -cos(angle), 0,
-		cos(angle), sin(angle), 0,
-		0, 0, 0;
-
-	Matrix3d T;
-	T.setIdentity();
-	T.col(2) = Vector3d(this->position[0], this->position[1], 1.0);
-
-	return T * R1;
-}
-
-MatrixXd Link::calculatePDoublePrime() 
-{
-	MatrixXd R2(3, 3);
-	R2 << -cos(angle), sin(angle), 0,
-		-sin(angle), -cos(angle), 0,
-		0, 0, 0;
-
-	Matrix3d T;
-	T.setIdentity();
-	T.col(2) = Vector3d(this->position[0], this->position[1], 1.0);
-
-	return T * R2;
-}
-
-void Link::calculateTransformations(const VectorXd& pTar)
-{
-
-}
-
-
 
 void Link::draw(const shared_ptr<Program> prog, shared_ptr<MatrixStack> MV, const shared_ptr<Shape> shape) const
 {

@@ -24,12 +24,14 @@
 #include "Texture.h"
 #include "ObjectiveA4.h"
 #include "OptimizerGDLS.h"
+#include "OptimizerNM.h"
 
 using namespace std;
 using namespace glm;
 using namespace Eigen;
 
 bool keyToggles[256] = {false}; // only for English keyboards!
+bool finiteDiff = false;
 
 GLFWwindow *window; // Main application window
 string RESOURCE_DIR = ""; // Where the resources are loaded from
@@ -39,10 +41,12 @@ shared_ptr<Program> progTex;
 shared_ptr<Shape> shape;
 shared_ptr<Texture> texture;
 
-const int NLINKS = 4;
+const int NLINKS = 10;
 vector< shared_ptr<Link> > links;
 shared_ptr<ObjectiveA4> objective;
-shared_ptr<OptimizerGDLS> optimizer;
+shared_ptr<OptimizerGDLS> optimizerGDLS;
+shared_ptr<OptimizerNM> optimizerNM;
+VectorXd thetaInit(NLINKS);
 
 static void error_callback(int error, const char *description)
 {
@@ -98,8 +102,22 @@ static void cursor_position_callback(GLFWwindow* window, double xmouse, double y
 	Vector2d x;
 	x(0) = 2.0 * xmax * ((xmouse / width) - 0.5);
 	x(1) = 2.0 * ymax * (((height - ymouse) / height) - 0.5);
-	if(keyToggles[(unsigned)' ']) {
-		cout << x << endl;
+	if(keyToggles[(unsigned)' ']) 
+	{
+		if (keyToggles[(unsigned)'d'])
+		{
+			finiteDiff = !finiteDiff;
+		}
+
+		VectorXd pTar(3);
+		pTar << x(0), x(1), 1.0;
+		VectorXd newTheta = Link::updateAngles(thetaInit, pTar, objective, optimizerGDLS, optimizerNM, finiteDiff);
+
+		for (int i = 0; i < NLINKS; i++)
+		{
+			links[i]->setAngle(newTheta(i));
+			thetaInit(i) = newTheta(i);
+		}
 	}
 }
 
@@ -108,18 +126,6 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 	// Get the current mouse position.
 	double xmouse, ymouse;
 	glfwGetCursorPos(window, &xmouse, &ymouse);
-
-	VectorXd pTar(3), thetaInit(4);
-	pTar << 3.0, 1.0, 1.0;
-	thetaInit << 0.0, 0.0, 0.0, 0.0;
-	objective->calculateTransformations(links[0]);
-	VectorXd newTheta = optimizer->optimize(objective, thetaInit, pTar);
-	cout << newTheta << endl;
-	for (int i = 0; i < NLINKS; i++)
-	{
-		links[i]->setAngle(newTheta(i));
-	}
-
 }
 
 static void init()
@@ -183,8 +189,16 @@ static void init()
 		links.push_back(link);
 	}
 
+	for (int i = 0; i < NLINKS; i++)
+	{
+		thetaInit(i) = 0.0;
+	}
+
 	objective = make_shared<ObjectiveA4>();
-	optimizer = make_shared<OptimizerGDLS>();
+	optimizerGDLS = make_shared<OptimizerGDLS>();
+	optimizerNM = make_shared<OptimizerNM>();
+	optimizerGDLS->setIterMax(10 * NLINKS);
+	optimizerNM->setIterMax(10 * NLINKS);
 }
 
 void render()

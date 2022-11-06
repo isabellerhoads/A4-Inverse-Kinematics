@@ -11,7 +11,7 @@ class OptimizerGDLS : public Optimizer
 public:
 	OptimizerGDLS();
 	virtual ~OptimizerGDLS();
-	virtual Eigen::VectorXd optimize(const std::shared_ptr<ObjectiveA4> objective, const Eigen::VectorXd& thetaInit, const Eigen::VectorXd& pTar);
+	virtual Eigen::VectorXd optimize(const std::shared_ptr<ObjectiveA4> objective, const Eigen::VectorXd& thetaInit, const Eigen::VectorXd& pTar, bool finiteDiff);
 	
 	void setAlphaInit(double alphaInit) { this->alphaInit = alphaInit; }
 	void setGamma(double gamma) { this->gamma = gamma; }
